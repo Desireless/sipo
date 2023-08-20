@@ -29,7 +29,7 @@ export default async function Home() {
   return (
     <div className='w-full max-w-xl mx-auto'>
       <nav className='flex justify-between px-4 py-6 border border-gray-300 border-t-0'>
-        <h1 className='text-xl font-bold'>Sipo</h1>
+        <h1 className='text-xl font-bold'>Hola {String(session.user.user_metadata.name)}</h1>
         <AuthButtonServer />
       </nav>
       <NewTweet user={session.user}/>

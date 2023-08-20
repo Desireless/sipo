@@ -9,8 +9,6 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     const router = useRouter();
 
 
-    
-
     // Debido que Home es ServerComponent no es posible usar useEffect, por lo que se usa el hook useRouter para refrescar la página
     const handleSignOut = async () => {
         await supabase.auth.signOut();
