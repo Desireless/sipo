@@ -11,12 +11,12 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         tweets,
         (currentOptimistic, newTweet) => {
             const newOptimisticTweets = [...currentOptimistic];
-
             const index = newOptimisticTweets.findIndex((tweet) => tweet.id === newTweet.id);
             newOptimisticTweets[index] = newTweet;
             return newOptimisticTweets;
         }
     );
+
 
     const supabase = createClientComponentClient();
     const router = useRouter();
@@ -37,8 +37,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     }, [supabase, router])
 
     return optimisticTweets.map(tweet => (
-        <div key={tweet.id} className='border border-gray-300 border-t-0 px-4 py-8 flex'>
-            <div>
+        <div key={tweet.id} className='border border-gray-300 border-t-0 px-4 py-6 flex'>
+            <div className="flex-shrink-0 max-w-full">
                 <Image
                     src={tweet.author.avatar_url}
                     alt="Avatar"
@@ -50,6 +50,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 <p>
                     <span className="font-bold">{tweet.author.name}</span>
                     <span className="text-gray-400 ml-2">@{tweet.author.username}</span>
+                    <span className="text-gray-400 ml-2">~ fecha</span>
                 </p>
                 <p>{tweet.title}</p>
                 <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweets} />

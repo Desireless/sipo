@@ -2,8 +2,8 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-
-
+import { toast } from 'wc-toast';
+import { useEffect } from "react";
 
 export default function Likes({ tweet, addOptimisticTweet }: { tweet: TweetWithAuthor; addOptimisticTweet: (tweet: TweetWithAuthor) => void }) {
 
@@ -12,7 +12,6 @@ export default function Likes({ tweet, addOptimisticTweet }: { tweet: TweetWithA
     const handleLikes = async () => {
         const supabase = createClientComponentClient<Database>();
         const { data: { user } } = await supabase.auth.getUser();
-
         if (user) {
             if (tweet.user_has_liked_tweet) {
                 addOptimisticTweet({ ...tweet, user_has_liked_tweet: false, likes: tweet.likes - 1 });
@@ -24,9 +23,12 @@ export default function Likes({ tweet, addOptimisticTweet }: { tweet: TweetWithA
 
             router.refresh();
         }
+
     }
 
-    return (<button onClick={handleLikes} className="group flex items-center"> 
+    return (
+        <>
+    <button onClick={handleLikes} className="group flex items-center my-0.5"> 
     <svg xmlns="http://www.w3.org/2000/svg" 
     width="15" 
     height="15" 
@@ -43,5 +45,7 @@ export default function Likes({ tweet, addOptimisticTweet }: { tweet: TweetWithA
         </span>
         
         </button>
+
+        </>
     )
 }
