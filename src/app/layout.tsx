@@ -1,5 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import { ToastContainer} from '@/app/components/toast-client';
+import 'react-toastify/dist/ReactToastify.min.css'
 
 export const metadata: Metadata = {
   title: 'Sipo App',
@@ -14,8 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <ToastContainer />
         <main className='bg-slate-50 min-h-screen flex'>
-        <wc-toast></wc-toast>
         {children}
         </main>
       </body>

@@ -2,6 +2,8 @@
 import { User, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import {  useRef } from "react";
+import {toast } from 'react-toastify';
+import ToastService from "./toast-service";
 
 
 export default function NewTweet({user}: {user: User}) {
@@ -9,7 +11,13 @@ export default function NewTweet({user}: {user: User}) {
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const addTweet = async (tweet: string) => {
-        const aber = await supabase.from("tweets").insert({title: tweet, user_id: user.id});
+        const ok = await supabase.from("tweets").insert({title: tweet, user_id: user.id});
+
+        if(ok.error === null){ 
+            ToastService.success("Mensaje enviado");
+        }else{
+            ToastService.error("Error al enviar el mensaje");
+        }
 
     }
 
@@ -18,6 +26,7 @@ export default function NewTweet({user}: {user: User}) {
         if (!inputRef.current) return;
 
         if(inputRef.current.value.trim() === ''){
+            ToastService.warning("El mensaje no puede estar vacío");
             return;
         }
         addTweet(inputRef.current.value);
@@ -30,7 +39,7 @@ export default function NewTweet({user}: {user: User}) {
             <div className="h-12 w-12">
                 <Image src={user.user_metadata.avatar_url} alt="Avatar" className="rounded-full" width={48} height={48} />
             </div>
-            <input type="text" name="title" autoComplete="off" ref={inputRef} onKeyDown={
+            <input type="text" name="title" autoComplete="off" ref={inputRef} maxLength={250} onKeyDown={
                 (event) => {
                     onKeyPress(event.key);
                 }
