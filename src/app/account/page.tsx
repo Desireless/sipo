@@ -16,20 +16,19 @@ export default async function Account() {
     if (!session) {
         redirect("/login");
     }
+    // Agrega .Single() para que solo devuelva un objeto
+    const { data } = await supabase.from('profiles').select('*, name, username, avatar_url').eq('id', session.user.id).single();
 
-    const { data } = await supabase.from('profiles').select('*, name, username, avatar_url').eq('id', session.user.id);
-
-    if (data && data[0]) {
-        name = data[0].name;
-        username = data[0].username;
+    if (data) {
+        name = data.name;
+        username = data.username;
 
         if(name === null){
             name = '';
         }
 
     }else{
-        console.log("no hay datos");
-        // redirect("/login");
+        redirect("/login");
     }
 
     return (
