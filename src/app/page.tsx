@@ -4,6 +4,7 @@ import AuthButtonServer from './auth-button-server';
 import { redirect } from 'next/navigation';
 import NewTweet from './components/new-tweet';
 import Tweets from './components/tweets';
+import Link from 'next/link';
 /*
   Home es una página que se renderiza en el servidor, por lo que es posible usar async/await y mostrar los datos obtenidos de inmediato
 */
@@ -29,7 +30,7 @@ export default async function Home() {
   return (
     <div className='w-full max-w-xl mx-auto'>
       <nav className='flex justify-between px-4 py-6 border border-gray-300 border-t-0'>
-        <h1 className='text-xl font-bold'>Hola {String(session.user.user_metadata.name)}</h1>
+        <Link href='/account' className='text-xl font-bold hover:text-gray-600'>@{String(session.user.user_metadata.name)}</Link>
         <AuthButtonServer />
       </nav>
       <NewTweet user={session.user}/>
