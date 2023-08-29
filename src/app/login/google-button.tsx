@@ -17,7 +17,6 @@ export default function GoogleButton() {
             }
         });
 
-        console.log(data, error);
     }
 
     return (

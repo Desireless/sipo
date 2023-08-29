@@ -25,7 +25,7 @@ export default function Likes({ tweet, addOptimisticTweet }: { tweet: TweetWithA
     }
 
     return (
-        <button onClick={handleLikes} className="group flex items-center my-0.5">
+        <button onClick={handleLikes} className="group flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg"
                 width="15"
                 height="15"

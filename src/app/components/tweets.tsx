@@ -38,7 +38,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     }, [supabase, router])
 
     return optimisticTweets.map(tweet => (
-        <div key={tweet.id} className='border border-gray-300 border-t-0 px-4 py-6 flex'>
+        <div key={tweet.id} className='border border-gray-300 border-t-0 px-4 py-5 flex'>
             <div className="flex-shrink-0 max-w-full">
                 <Image
                     src={tweet.author.avatar_url}
@@ -47,14 +47,17 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                     height={48}
                     className='rounded-full'/>
             </div>
-            <div className="ml-4">
+            <div className="ml-4 overflow-y-auto">
                 <p>
                     <span className="font-bold">@{tweet.author.username}</span>
                     <span className="text-gray-400 ml-2">~</span>
                     <span className="text-gray-400 ml-2">{tweet.created_at}</span>
                 </p>
-                <p>{tweet.title}</p>
+                <p className="whitespace-normal break-words">{tweet.title}</p>
+                <div className="flex flex-col justify-start gap-2 mt-2">
+
                 <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweets} />
+                </div>
             </div>
         </div>
     )
