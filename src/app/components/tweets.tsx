@@ -4,6 +4,7 @@ import Likes from "./likes";
 import { useEffect, experimental_useOptimistic as useOptimistic } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import formatTweetDate from "@/utils/format-tweet-date";
 
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
@@ -48,9 +49,9 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             </div>
             <div className="ml-4">
                 <p>
-                    <span className="font-bold">{tweet.author.name}</span>
-                    <span className="text-gray-400 ml-2">@{tweet.author.username}</span>
-                    <span className="text-gray-400 ml-2">~ fecha</span>
+                    <span className="font-bold">@{tweet.author.username}</span>
+                    <span className="text-gray-400 ml-2">~</span>
+                    <span className="text-gray-400 ml-2">{tweet.created_at}</span>
                 </p>
                 <p>{tweet.title}</p>
                 <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweets} />

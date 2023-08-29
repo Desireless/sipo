@@ -5,13 +5,14 @@ import { redirect } from 'next/navigation';
 import NewTweet from './components/new-tweet';
 import Tweets from './components/tweets';
 import Link from 'next/link';
+import formatTweetDate from '@/utils/format-tweet-date';
 /*
   Home es una página que se renderiza en el servidor, por lo que es posible usar async/await y mostrar los datos obtenidos de inmediato
 */
 export default async function Home() {
   const supabase = createServerComponentClient<Database>({ cookies });
 
-  const { data: {session} } = await supabase.auth.getSession();
+  const { data: { session } } = await supabase.auth.getSession();
   if (!session) {
     redirect("/login");
   }
@@ -22,7 +23,8 @@ export default async function Home() {
     ...tweet,
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
-    likes: tweet.likes.length
+    likes: tweet.likes.length,
+    created_at: formatTweetDate(tweet.created_at)
   }
   )) ?? [];
 
@@ -31,9 +33,14 @@ export default async function Home() {
     <div className='w-full max-w-xl mx-auto'>
       <nav className='flex justify-between px-4 py-6 border border-gray-300 border-t-0'>
         <Link href='/account' className='text-xl font-bold hover:text-gray-600'>@{String(session.user.user_metadata.name)}</Link>
-        <AuthButtonServer />
+
+        <div>
+          <Link href='/account' className='text-sm text-gray-600 hover:text-black mx-2'>Cuenta</Link>
+
+          <AuthButtonServer />
+        </div>
       </nav>
-      <NewTweet user={session.user}/>
+      <NewTweet user={session.user} />
       <Tweets tweets={tweets} />
     </div>
   )

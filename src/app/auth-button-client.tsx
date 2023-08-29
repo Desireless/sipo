@@ -17,6 +17,6 @@ export default function AuthButtonClient({ session }: { session: Session | null 
 
 
     return session ? (
-        <button className="text-sm text-gray-600 hover:text-black" onClick={handleSignOut}> Desconectarse</button>
+        <button className="text-sm text-gray-600 hover:text-red-700" onClick={handleSignOut}>Salir</button>
     ) : (<GithubButton />)
 }
