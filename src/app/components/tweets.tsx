@@ -4,7 +4,6 @@ import Likes from "./likes";
 import { useEffect, experimental_useOptimistic as useOptimistic } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import formatTweetDate from "@/utils/format-tweet-date";
 
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
@@ -45,7 +44,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                     alt="Avatar"
                     width={48}
                     height={48}
-                    className='rounded-full'/>
+                    className='rounded-full' />
             </div>
             <div className="ml-4 overflow-y-auto">
                 <p>
@@ -55,8 +54,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 </p>
                 <p className="whitespace-normal break-words">{tweet.title}</p>
                 <div className="flex flex-col justify-start gap-2 mt-2">
-
-                <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweets} />
+                    <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweets} />
                 </div>
             </div>
         </div>
