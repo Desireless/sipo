@@ -46,7 +46,7 @@ export default async function Profile({ params }: { params: { username: string }
     return (
         <div className='w-full max-w-full mx-auto'>
             {/* Navbar */}
-            <nav className='border border-gray-300 border-t-0 px-4 py-5 flex'>
+            <nav className='border border-gray-300 border-t-0 px-4 py-4 flex'>
                 <p>HOLA</p>
             </nav>
 

@@ -3,6 +3,7 @@
 import { Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from 'next/navigation';
 import GithubButton from "./login/github-button";
+import Image from 'next/image'
 
 export default function AuthButtonClient({ session }: { session: Session | null }) {
     const supabase = createClientComponentClient<Database>();
@@ -17,6 +18,17 @@ export default function AuthButtonClient({ session }: { session: Session | null 
 
 
     return session ? (
-        <button className="text-sm text-gray-600 hover:text-red-700" onClick={handleSignOut}>Salir</button>
+            <button
+                className="flex border-none rounded-lg text-center align-middle items-center hover:text-red-700" onClick={handleSignOut}>
+                <Image
+                    src="/logout-icon-black.svg"
+                    alt="Log out Logo"
+                    className="dark:invert"
+                    width={28}
+                    height={28}
+                    priority
+                />
+            </button>
+
     ) : (<GithubButton />)
 }
