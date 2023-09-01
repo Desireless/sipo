@@ -5,6 +5,7 @@ import React from 'react'
 import UserProfile from './user-profile';
 import Image from "next/image";
 import formatTweetDate from '@/utils/format-tweet-date';
+import Navbar from '../components/navbar';
 
 
 export default async function Profile({ params }: { params: { username: string } }) {
@@ -46,9 +47,8 @@ export default async function Profile({ params }: { params: { username: string }
     return (
         <div className='w-full max-w-full mx-auto'>
             {/* Navbar */}
-            <nav className='border border-gray-300 border-t-0 px-4 py-4 flex'>
-                <p>HOLA</p>
-            </nav>
+            <Navbar username={String(session.user.user_metadata.name)}/>
+
 
             {/* Contenedor en medio */}
             <div className='w-full max-w-xl mx-auto'>
@@ -67,7 +67,8 @@ export default async function Profile({ params }: { params: { username: string }
                                     alt="Avatar"
                                     width={48}
                                     height={48}
-                                    className='rounded-full' />
+                                    className='rounded-full'
+                                    priority />
                             </div>
                             <div className="ml-4 overflow-y-auto">
                                 <p>

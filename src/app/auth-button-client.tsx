@@ -19,7 +19,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
 
     return session ? (
             <button
-                className="flex border-none rounded-lg text-center align-middle items-center hover:text-red-700" onClick={handleSignOut}>
+                className="flex border-none rounded-lg text-center align-middle items-center" onClick={handleSignOut}>
                 <Image
                     src="/logout-icon-black.svg"
                     alt="Log out Logo"
@@ -29,6 +29,5 @@ export default function AuthButtonClient({ session }: { session: Session | null 
                     priority
                 />
             </button>
-
     ) : (<GithubButton />)
 }

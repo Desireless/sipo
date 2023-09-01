@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { ToastContainer} from '@/app/components/toast-client';
+import { ToastContainer } from '@/app/components/toast-client';
 import 'react-toastify/dist/ReactToastify.min.css'
 
 export const metadata: Metadata = {
@@ -16,9 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <ToastContainer />
-        <main className='bg-slate-50 min-h-screen flex'>
-        {children}
+        <ToastContainer />
+        <main className='bg-slate-50 min-h-screen'>
+          {children}
         </main>
       </body>
     </html>
