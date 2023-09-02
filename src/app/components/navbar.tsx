@@ -8,7 +8,7 @@ type NavbarProps = {
 
 export default function Navbar( {username}: NavbarProps ) {
     return (
-        <nav className='border border-gray-300 border-t-0 border-l-0 border-r-0 px-4 py-3 flex justify-between'>
+        <nav className='border border-gray-300 border-t-0 border-l-0 border-r-0 px-4 py-3 flex justify-between items-center'>
             {/* WEB NAME */}
             <div>
                 <p className='font-bold'>SIPO</p>

@@ -4,6 +4,7 @@ import Likes from "./likes";
 import { useEffect, experimental_useOptimistic as useOptimistic } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import UserAvatar from "./avatar";
 
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
@@ -39,12 +40,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     return optimisticTweets.map(tweet => (
         <div key={tweet.id} className='border border-gray-300 border-t-0 px-4 py-5 flex'>
             <div className="flex-shrink-0 max-w-full">
-                <Image
-                    src={tweet.author.avatar_url}
-                    alt="Avatar"
-                    width={48}
-                    height={48}
-                    className='rounded-full' />
+                <UserAvatar avatarUrl={tweet.author.avatar_url} resolution="medium" />
             </div>
             <div className="ml-4 overflow-y-auto">
                 <p>

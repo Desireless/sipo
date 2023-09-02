@@ -4,6 +4,7 @@ import Image from "next/image";
 import {  useRef } from "react";
 import {toast } from 'react-toastify';
 import ToastService from "./toast-service";
+import UserAvatar from "./avatar";
 
 
 export default function NewTweet({user}: {user: User}) {
@@ -37,7 +38,7 @@ export default function NewTweet({user}: {user: User}) {
         <div className="border border-gray-300 border-t-0 hover:bg-white">
             <div className="flex py-8 px-4">
             <div className="h-12 w-12">
-                <Image src={user.user_metadata.avatar_url} alt="Avatar" className="rounded-full" width={48} height={48} />
+                <UserAvatar avatarUrl={user.user_metadata.avatar_url} resolution="medium" />
             </div>
             <input type="text" name="title" autoComplete="off" ref={inputRef} maxLength={250} onKeyDown={
                 (event) => {

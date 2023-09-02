@@ -1,4 +1,6 @@
-export type Json =
+Need to install the following packages:
+supabase@1.88.0
+Ok to proceed? (y) export type Json =
   | string
   | number
   | boolean
@@ -9,6 +11,34 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      followers: {
+        Row: {
+          follower_id: string
+          following_id: string
+        }
+        Insert: {
+          follower_id: string
+          following_id: string
+        }
+        Update: {
+          follower_id?: string
+          following_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "followers_follower_id_fkey"
+            columns: ["follower_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "followers_following_id_fkey"
+            columns: ["following_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       likes: {
         Row: {
           created_at: string
@@ -45,22 +75,22 @@ export interface Database {
       }
       profiles: {
         Row: {
-          avatar_url: string
+          avatar_url: string | null
           id: string
-          name: string
-          username: string
+          name: string | null
+          username: string | null
         }
         Insert: {
-          avatar_url: string
+          avatar_url?: string | null
           id: string
-          name: string
-          username: string
+          name?: string | null
+          username?: string | null
         }
         Update: {
-          avatar_url?: string
+          avatar_url?: string | null
           id?: string
-          name?: string
-          username?: string
+          name?: string | null
+          username?: string | null
         }
         Relationships: [
           {

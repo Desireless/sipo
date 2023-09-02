@@ -6,6 +6,7 @@ import UserProfile from './user-profile';
 import Image from "next/image";
 import formatTweetDate from '@/utils/format-tweet-date';
 import Navbar from '../components/navbar';
+import UserAvatar from '../components/avatar';
 
 
 export default async function Profile({ params }: { params: { username: string } }) {
@@ -33,7 +34,7 @@ export default async function Profile({ params }: { params: { username: string }
     /**
      * 3. Verificar que el usuario existe
      */
-    const { data } = await supabase.from('profiles').select('id,name,  username, avatar_url').eq('username', user).single();
+    const { data } = await supabase.from('profiles').select('id,name, username, avatar_url').eq('username', user).single();
 
     if (!data) {
         return notFound();
@@ -62,13 +63,7 @@ export default async function Profile({ params }: { params: { username: string }
 
                         <div key={tweet.id} className='border border-gray-300 border-t-0 px-4 py-5 flex'>
                             <div className="flex-shrink-0 max-w-full">
-                                <Image
-                                    src={data.avatar_url}
-                                    alt="Avatar"
-                                    width={48}
-                                    height={48}
-                                    className='rounded-full'
-                                    priority />
+                                <UserAvatar avatarUrl={data.avatar_url} resolution='medium' />
                             </div>
                             <div className="ml-4 overflow-y-auto">
                                 <p>

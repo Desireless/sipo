@@ -1,17 +1,17 @@
 import React from 'react'
 import Image from "next/image";
-import UserNoImageIcon from '@/public/user-icon.svg';
+import FollowButton from '../components/follow-button';
+import Followers from '../components/followers';
 
 type UserProfileProps = {
     user_id: string;
-    name: string;
-    username: string;
-    avatar_url: string;
+    name: string | null;
+    username: string | null;
+    avatar_url: string | null;
 }
 
 export default function UserProfile(userData: UserProfileProps) {
-    // const avatar_url = userData.avatar_url ? userData.avatar_url : '';
-    const avatar_url = '';
+    const avatar_url = userData.avatar_url ? userData.avatar_url : '';
     return (
         <div className='flex flex-col justify-start px-4 py-6 border border-gray-300 border-t-0 gap-4 overflow-y-auto'>
             <div className='flex justify-center max-w-full'>
@@ -36,9 +36,7 @@ export default function UserProfile(userData: UserProfileProps) {
                     }
             </div>
 
-            <div className='flex justify-center max-w-full'>
-                <button className="w-20 bg-black rounded-lg transition duration-200 hover:bg-slate-500 px-4 py-1 text-white font-semibold "> Seguir </button>
-            </div>
+            <FollowButton />
 
             <div className='mt-2 whitespace-normal break-words'>
                 <p className='text-lg font-bold'>{userData.name}</p>
@@ -47,7 +45,7 @@ export default function UserProfile(userData: UserProfileProps) {
             </div>
 
             <div className='flex flex-row justify-between'>
-                <p>Seguidores</p>
+                <Followers userId={userData.user_id}/>
             </div>
         </div>
     )
