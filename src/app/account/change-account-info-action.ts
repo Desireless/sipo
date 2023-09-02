@@ -1,7 +1,7 @@
 'use server';
 
+import { getErrorMessage } from "@/utils";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { getErrorMessage } from "../components/get-error-message";
 import { cookies } from "next/headers";
 
 export const changeAccountInformation = async (formData: FormData) => {

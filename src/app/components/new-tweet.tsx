@@ -3,8 +3,8 @@ import { User, createClientComponentClient } from "@supabase/auth-helpers-nextjs
 import Image from "next/image";
 import {  useRef } from "react";
 import {toast } from 'react-toastify';
-import ToastService from "./toast-service";
 import UserAvatar from "./avatar";
+import { ToastService } from "@/services";
 
 
 export default function NewTweet({user}: {user: User}) {
