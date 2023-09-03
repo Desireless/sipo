@@ -2,7 +2,7 @@
 
 import { Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from 'next/navigation';
-import GithubButton from "./login/github-button";
+import GithubButton from "../login/github-button";
 import Image from 'next/image'
 
 export default function AuthButtonClient({ session }: { session: Session | null }) {

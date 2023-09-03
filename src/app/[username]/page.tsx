@@ -36,13 +36,23 @@ export default async function Profile({ params }: { params: { username: string }
      */
     const { data } = await supabase.from('profiles').select('id,name, username, avatar_url').eq('username', user).single();
 
+    
     if (!data) {
         return notFound();
     }
+    
+    /**
+     * 4. Verificar si el usuario logueado sigue al usuario de la url
+    */
+    const following = await supabase.from('followers').select('*').match({ follower_id: session.user.id, following_id: data?.id});
+    let isFollowing = false;
+    if (following.data?.length !== 0) {
+        isFollowing = true;
+    }
 
     /**
-     * 4. Obtener los tweets del usuario
-     */
+     * 5. Obtener los tweets del usuario
+    */
     const tweets = await supabase.from('tweets').select('*, likes(tweet_id)').eq('user_id', data.id).order('created_at', { ascending: false }).range(0,1);
 
     return (
@@ -55,7 +65,7 @@ export default async function Profile({ params }: { params: { username: string }
             <div className='w-full max-w-xl mx-auto'>
 
                 {/* profile */}
-                <UserProfile user_id={data.id} name={data.name} username={data.username} avatar_url={data.avatar_url} />
+                <UserProfile user_id={data.id} name={data.name} username={data.username} avatar_url={data.avatar_url} is_following={isFollowing} />
 
                 {/* Tweets */}
                 {

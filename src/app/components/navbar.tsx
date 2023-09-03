@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthButtonServer from '../auth-button-server';
+import AuthButtonServer from './auth-button-server';
 import Link from 'next/link';
 
 type NavbarProps = {
@@ -17,7 +17,7 @@ export default function Navbar( {username}: NavbarProps ) {
             {/* NAVIGATION BAR */}
             <div className='flex flex-row gap-4'>
                 <p className='font-semibold'>Hola @{username}</p>
-                <Link href='/account' >Perfil</Link>
+                <Link href='/account' className='text-slate-600 hover:text-black'>Perfil</Link>
                 <AuthButtonServer />
             </div>
         </nav>

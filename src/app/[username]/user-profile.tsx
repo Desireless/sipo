@@ -1,42 +1,24 @@
 import React from 'react'
-import Image from "next/image";
 import FollowButton from '../components/follow-button';
 import Followers from '../components/followers';
+import { UserAvatar } from '../components';
 
 type UserProfileProps = {
     user_id: string;
     name: string | null;
     username: string | null;
     avatar_url: string | null;
+    is_following: boolean;
 }
 
-export default function UserProfile(userData: UserProfileProps) {
-    const avatar_url = userData.avatar_url ? userData.avatar_url : '';
+export default async function UserProfile(userData: UserProfileProps) {
     return (
         <div className='flex flex-col justify-start px-4 py-6 border border-gray-300 border-t-0 gap-4 overflow-y-auto'>
             <div className='flex justify-center max-w-full'>
-                {!!avatar_url.length ?
-                    <Image
-                        src={avatar_url}
-                        alt="Avatar"
-                        width={70}
-                        height={70}
-                        className='rounded-full'
-                        priority
-                    />
-                    :
-                    <Image
-                    src="/profile-no-avatar-icon.svg"
-                    alt="No avatar image"
-                    className="rounded-full dark:invert"
-                    width={70}
-                    height={70}
-                    priority
-                />
-                    }
+                <UserAvatar avatarUrl={userData.avatar_url} resolution='large' />
             </div>
 
-            <FollowButton />
+            <FollowButton userId={userData.user_id} isFollower={userData.is_following}/>
 
             <div className='mt-2 whitespace-normal break-words'>
                 <p className='text-lg font-bold'>{userData.name}</p>

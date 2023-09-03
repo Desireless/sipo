@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import AuthButtonClient from "../auth-button-client";
+import AuthButtonClient from "../components/auth-button-client";
 import GithubButton from "./github-button";
 import GoogleButton from "./google-button";
 

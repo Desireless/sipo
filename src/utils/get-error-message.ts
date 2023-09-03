@@ -1,3 +1,8 @@
+/*
+*   Recibe error de tipo desconocido y devuelve un string con el mensaje de error
+*   @param error: unknown
+*   @returns string
+*/
 export const getErrorMessage = (error: unknown): string => {
 	let message: string;
 	

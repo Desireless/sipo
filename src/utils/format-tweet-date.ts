@@ -1,6 +1,9 @@
 import date from 'date-and-time';
-
-// Recibe una fecha y devuelve un string con el formato adecuado
+/*
+*   Recibe fecha y retorna el tiempo transcurrido hasta el momento de ejecución
+*   @param dateToFormat string
+*   @returns string
+*/
 export default function formatTweetDate(dateToFormat: string): string {
     const tweetDate = new Date(dateToFormat);
     const currentDate = new Date();

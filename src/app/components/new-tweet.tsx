@@ -19,7 +19,6 @@ export default function NewTweet({user}: {user: User}) {
         }else{
             ToastService.error("Error al enviar el mensaje");
         }
-
     }
 
     const onKeyPress = (key: string) => {

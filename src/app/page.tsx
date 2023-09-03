@@ -1,12 +1,8 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import AuthButtonServer from './auth-button-server';
 import { redirect } from 'next/navigation';
-import NewTweet from './components/new-tweet';
-import Tweets from './components/tweets';
-import Link from 'next/link';
 import formatTweetDate from '@/utils/format-tweet-date';
-import Navbar from './components/navbar';
+import { Navbar, NewTweet, Tweets } from './components';
 /*
   Home es una página que se renderiza en el servidor, por lo que es posible usar async/await y mostrar los datos obtenidos de inmediato
 */
