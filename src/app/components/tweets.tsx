@@ -5,6 +5,7 @@ import { useEffect, experimental_useOptimistic as useOptimistic } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import UserAvatar from "./avatar";
+import Link from "next/link";
 
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
@@ -44,7 +45,10 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             </div>
             <div className="ml-4 overflow-y-auto">
                 <p>
-                    <span className="font-bold">@{tweet.author.username}</span>
+                    <Link href={`/${tweet.author.username}`}>
+
+                        <span className="font-bold">@{tweet.author.username}</span>
+                    </Link>
                     <span className="text-gray-400 ml-2">~</span>
                     <span className="text-gray-400 ml-2">{tweet.created_at}</span>
                 </p>

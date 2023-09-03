@@ -7,13 +7,28 @@ import { Navbar, NewTweet, Tweets } from './components';
   Home es una página que se renderiza en el servidor, por lo que es posible usar async/await y mostrar los datos obtenidos de inmediato
 */
 export default async function Home() {
+  /*
+  *   1. Obtener la sesión del usuario
+  */
   const supabase = createServerComponentClient<Database>({ cookies });
-
   const { data: { session } } = await supabase.auth.getSession();
+
   if (!session) {
     redirect("/login");
   }
 
+  /*
+  *   2. Comprobar si el usuario tiene username creado, sino, redirigir a la página de creación de username
+  */
+  const userLoggedHasUsername = await supabase.from('profiles').select('username').eq('id', session.user.id);
+
+  if (!userLoggedHasUsername) {
+    redirect("/account");
+  }
+
+  /*
+  *   3. Obtener los tweets de la base de datos
+  */
   const { data } = await supabase.from('tweets').select('*, author: profiles(*), likes(user_id)').order('created_at', { ascending: false });
 
   const tweets = data?.map((tweet) => ({
@@ -28,7 +43,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar username={String(session.user.user_metadata.name)}/>
+      <Navbar session={ session } />
       <div className='w-full max-w-xl mx-auto'>
         <NewTweet user={session.user} />
         <Tweets tweets={tweets} />
