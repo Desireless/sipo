@@ -7,6 +7,7 @@ type FollowersProps = {
 }
 
 export default async function Followers({ userId }: FollowersProps) {
+    cookies().getAll();
     const supabase = createServerComponentClient<Database>({ cookies });
 
     const { data, error } = await supabase.from('followers').select('*').eq('following_id', userId);

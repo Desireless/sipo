@@ -10,6 +10,7 @@ import { cookies } from "next/headers";
 *   @param is_follwing: booleano que indica si se quiere seguir o dejar de seguir
 */
 export const followAction = async (user_id_to_follow: string, is_follwing: boolean) => {
+    cookies().getAll();
     const supabase = createServerComponentClient<Database>({ cookies });
     const { data: { session } } = await supabase.auth.getSession();
 

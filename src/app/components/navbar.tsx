@@ -5,6 +5,7 @@ import LogoutButtonClient from './logout-button-client';
 import { cookies } from "next/headers";
 
 export default async function Navbar({ session }: { session: Session | null }) {
+    cookies().getAll();
     const supabase = createServerComponentClient<Database>({ cookies });
     const {data} = await supabase.from('profiles').select('username').eq('id', session?.user.id).single();
     return (

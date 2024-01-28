@@ -24,6 +24,7 @@ export default async function Profile({ params }: { params: { username: string }
     /**
      * 2. Verificar que el usuario esta logueado
      */
+    cookies().getAll();
     const supabase = createServerComponentClient<Database>({ cookies });
     const { data: { session } } = await supabase.auth.getSession();
 

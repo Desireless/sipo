@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { changeAccountInformation } from "./change-account-info-action";
 
-export const AccountInfoForm = ({ username }: { username: string }) => {
+export const AccountInfoForm = ({ username }: { username: string | null }) => {
 	const [error, setError] = useState('');
 	const [inputValue, setInputValue] = useState('');
 

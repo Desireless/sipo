@@ -6,11 +6,12 @@ import { AccountInfoForm } from "./account-info-form";
 
 
 export default async function Account() {
+    cookies().getAll();
     const supabase = createServerComponentClient<Database>({ cookies });
     const { data: { session } } = await supabase.auth.getSession();
 
-    let name = '';
-    let username = '';
+    let name: string | null = null;  // Declaración inicial con null o un string válido
+    let username: string | null = null;
     let avatar_url = '';
 
     if (!session) {

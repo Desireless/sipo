@@ -6,6 +6,7 @@ import GithubButton from "./github-button";
 import GoogleButton from "./google-button";
 
 export default async function Login() {
+  cookies().getAll();
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: { session } } = await supabase.auth.getSession();
   if (session) {
