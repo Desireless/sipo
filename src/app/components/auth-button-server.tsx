@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import AuthButtonClient from "./auth-button-client";
 
 export default async function AuthButtonServer () {
+    cookies().getAll();
     const supabase = createServerComponentClient<Database>({cookies});
     const {data: {session}} = await supabase.auth.getSession();
 
